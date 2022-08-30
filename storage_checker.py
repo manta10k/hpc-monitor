@@ -29,23 +29,7 @@ parser.add_argument('channel', help="The channel where an alert is launched", ch
 #parser.add_argument('--value',default="", help="optional additional message to display in the notification")
 args = parser.parse_args()
 myhost = os.uname()[1]
-loads=psutil.getloadavg()
-numcores=psutil.cpu_count()
 
-# this defines when a trigger is launched basing on
-# the load-per-core at 1, 5 and 15 minutes
-# e.g. 2 means "2x the number of cores"
-
-load_triggers=(2.2, 1.6, 1.4)
-
-# these are only for visualization purposes
-# the actual triggering of the notification 
-# is based on Glances config file
-
-cpu_warning_perc = 95
-memory_warning_perc = 90
-iowait_warning_perc = 20
-temperature_warning = 90
 data=None
 
 def get_report_deigo(conf):
@@ -57,7 +41,7 @@ def get_report_deigo(conf):
 		for line in sshProcess.stdout:
 			_,size,used,avail,use_percent,mnt = line.strip().split()
 
-			if int(use_percent.replace('%','')) > 10:
+			if int(use_percent.replace('%','')) > 70:
 				rt = 1
 				if int(use_percent.replace('%','')) > 90:
 					fl=':large_red_square:'
