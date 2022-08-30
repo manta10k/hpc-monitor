@@ -61,7 +61,7 @@ def get_report_deigo(conf):
 			'used':used,
 			'avail':avail,
 			'use_percent':use_percent,
-			'heading':'*{}*'.format(pathAlias),
+			'heading':':arrow_forward: *{}*'.format(pathAlias),
 			'color':color,
 			'ffields':[
 				{
@@ -71,7 +71,7 @@ def get_report_deigo(conf):
 				},
 				{
 					"title": "Used",
-					"value": '{} of {}'.format(use_percent,size),
+					"value": '{} {} of {}'.format(fl,use_percent,size),
 					'short':True
 				},
 				{

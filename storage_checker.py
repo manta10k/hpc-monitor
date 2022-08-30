@@ -38,7 +38,7 @@ if args.param == 'storage':
 		message=":floppy_disk: *Storage Alert*"
 		data = {'text':message,'attachments':[]}
 		for sto in storage.keys():
-			data['attachments'].append({'text':storage[sto]['heading'],'color':storage[sto]['color'],"footer": 'HPC notifier from {}'.format(myhost),'fields':storage[sto]['ffields']})
+			data['attachments'].append({'text':storage[sto]['heading'],'color':storage[sto]['color'],"footer": 'HPC notifier from {}'.format(myhost),'fields':storage[sto]['ffields'],"mrkdwn_in": ["fields", "text"]})
 
 if data and args.channel in config['channels']:
 	check_send_message(config,data,args.channel,args.param)
