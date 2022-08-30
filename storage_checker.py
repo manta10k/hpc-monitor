@@ -11,14 +11,21 @@ import configparser
 from hpc_report import *
 
 parser=argparse.ArgumentParser()
+defaultConfigFile = '{}/hpc.conf'.format(os.path.dirname(os.path.realpath(sys.argv[0])))
 
 parser.add_argument('param', help="The parameter for which the alert is launched",choices=['storage','report'])
 parser.add_argument('channel', help="The channel name where an alert is launched")
+parser.add_argument('--config', help="The path to a config file with settings. Default: {}".format(defaultConfigFile),default=defaultConfigFile)
 
 config = configparser.ConfigParser()
-config.read('hpc.conf')
-
 args = parser.parse_args()
+
+if os.path.isfile(args.config):
+	config.read(args.config)
+else:
+	print("Cannot access config file {}".format(args.config))
+	sys.exit(1)
+
 myhost = os.uname()[1]
 
 data=None
