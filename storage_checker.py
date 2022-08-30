@@ -1,22 +1,19 @@
 #!/usr/bin/env python
+
 __author__ = 'Moreno Zolfo (moreno.zolfo@oist.jp)'
 __version__ = '0.2'
 __date__ = '26 Aug 2022'
 
 
-import os
+import os, sys
 import argparse
-import sys
-import numpy as np
 import configparser
 from hpc_report import *
-import psutil
-
 
 parser=argparse.ArgumentParser()
 
 parser.add_argument('param', help="The parameter for which the alert is launched",choices=['storage','report'])
-parser.add_argument('channel', help="The channel where an alert is launched", choices=['private','public'])
+parser.add_argument('channel', help="The channel name where an alert is launched")
 
 config = configparser.ConfigParser()
 config.read('hpc.conf')
